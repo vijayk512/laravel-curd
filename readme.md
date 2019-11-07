@@ -23,7 +23,7 @@ To build the Application and it's containers, in your terminal go to the root di
 
 **# docker-compose up**
 
-At this stage you will have a working application at <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> and can use your favorite IDE to develop in you local system.
+At this stage you will have a working application at <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> and can use your favorite IDE to develop in your local environment's git cloned directory.
 
 Laravel DB Setup
 ================
