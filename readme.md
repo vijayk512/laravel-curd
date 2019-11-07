@@ -8,7 +8,7 @@ Setup
 
 Checkout code from git repository.
 
-Install docker and/or docker-compose.
+Install docker and docker-compose.
 
 <!-- Not needed as we include composer install in the app
 Use docker composer image to install framework packages.
@@ -19,11 +19,11 @@ Update permissions of files on your local system. For Linux use:
 
 **# sudo chown -R $USER:$USER ~/your-app-directory**-->
 
-To build the Applicaiton and it's containers, in your terminal, go to the root directory and run:
+To build the Application and it's containers, in your terminal go to the root directory and run:
 
 **# docker-compose up**
 
-At this stage you will have a working application. <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a>
+At this stage you will have a working application at <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> and can use your favorite IDE to develop in you local system.
 
 Laravel DB Setup
 ================
