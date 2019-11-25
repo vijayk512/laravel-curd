@@ -23,6 +23,8 @@ To build the Application and it's containers, in your terminal go to the root di
 
 **# docker-compose up**
 
+**# docker-compose exec app composer install**
+
 At this stage you will have a working application at <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> and can use your favorite IDE to develop in your local environment's git cloned directory.
 
 Laravel DB Setup
@@ -31,6 +33,14 @@ Laravel DB Setup
 We will run the Laravel migration command to setup database tables. This executes the command within the application container.
 
 **# docker-compose exec app php artisan migrate**
+
+<!--
+Laravel Authentication
+
+**# docker-compose exec app composer require laravel/ui --dev**
+
+**# docker-compose exec app php artisan ui vue --auth**
+-->
 
 Cleanup
 =======

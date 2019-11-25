@@ -25,41 +25,41 @@ services:
       - backend
 
   #Nginx Service
-  #webserver:
-  #  image: nginx:alpine
-  #  container_name: webserver
-  #  restart: unless-stopped
-  #  tty: true
-  #  ports:
-  #    - "80:80"
-  #    - "443:443"
-  #  volumes:
-  #    - ./:/var/www
-  #    - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-  #  networks:
-  #    - frontend
-  #    - backend
+  webserver:
+   image: nginx:alpine
+   container_name: webserver
+   restart: unless-stopped
+   tty: true
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+     - ./:/var/www
+     - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+   networks:
+     - frontend
+     - backend
 
   #Apache Service
-  webserver:
-    build:
-      context: ./docker/apache/
-      args:
-        APACHE_VERSION: ${APACHE_VERSION}
-    depends_on:
-      - app
-      - db
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www
-    networks:
-      - frontend
-      - backend
+  # webserver:
+  #   build:
+  #     context: ./docker/apache/
+  #     args:
+  #       APACHE_VERSION: ${APACHE_VERSION}
+  #   depends_on:
+  #     - app
+  #     - db
+  #   container_name: webserver
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./:/var/www
+  #   networks:
+  #     - frontend
+  #     - backend
 
   #MySQL Service
   db:
