@@ -148,7 +148,6 @@
 
     </div>
     <div class="modal-footer">
-        <a href="#" data-href="{{ $employee->id }}" id="delete-record" class="deleteText btn btn-danger">Delete record</a><br>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
