@@ -24,4 +24,8 @@ class Employee extends Authenticatable
     protected $hidden = [
 
     ];
+
+    public function getFullNameAttribute() {
+        return implode(' ', [$this->name_prefix, $this->last_name, $this->first_name]);
+    }
 }
