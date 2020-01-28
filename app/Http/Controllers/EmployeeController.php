@@ -49,12 +49,12 @@ class EmployeeController extends Controller
             'date_of_birth' => 'required|date',
             'date_of_joining' => 'required|date',
             'salary' => 'required|integer',
-            'ssn_1' => 'required|integer',
-            'ssn_2' => 'required|integer',
-            'ssn_3' => 'required|integer',
-            'phone_no_1' => 'required|integer',
-            'phone_no_2' => 'required|integer',
-            'phone_no_3' => 'required|integer',
+            'ssn_1' => ['required', 'regex:/^[0-9]{3}$/'],
+            'ssn_2' => ['required', 'regex:/^[0-9]{2}$/'],
+            'ssn_3' => ['required', 'regex:/^[0-9]{4}$/'],
+            'phone_no_1' => ['required', 'regex:/^[0-9]{3}$/'],
+            'phone_no_2' => ['required', 'regex:/^[0-9]{3}$/'],
+            'phone_no_3' => ['required', 'regex:/^[0-9]{4}$/'],
             'city' => 'required',
             'state' => 'required',
             'zip' => 'required|integer',
@@ -117,12 +117,12 @@ class EmployeeController extends Controller
             'date_of_birth' => 'required|date',
             'date_of_joining' => 'required|date',
             'salary' => 'required|integer',
-            'ssn_1' => 'required|integer',
-            'ssn_2' => 'required|integer',
-            'ssn_3' => 'required|integer',
-            'phone_no_1' => 'required|integer',
-            'phone_no_2' => 'required|integer',
-            'phone_no_3' => 'required|integer',
+            'ssn_1' => ['required', 'regex:/^[0-9]{3}$/'],
+            'ssn_2' => ['required', 'regex:/^[0-9]{2}$/'],
+            'ssn_3' => ['required', 'regex:/^[0-9]{4}$/'],
+            'phone_no_1' => ['required', 'regex:/^[0-9]{3}$/'],
+            'phone_no_2' => ['required', 'regex:/^[0-9]{3}$/'],
+            'phone_no_3' => ['required', 'regex:/^[0-9]{4}$/'],
             'city' => 'required',
             'state' => 'required',
             'zip' => 'required|integer',
@@ -144,19 +144,39 @@ class EmployeeController extends Controller
 
     }
 
-    public function destroy(Employee $employee)
-    {
-        $employee->delete();
+    public function getDelete(Request $request, Employee $employee) {
 
-        return view('employee.index');
+        return view('employee.delete', compact('employee'));
+    }
+
+    public function postDelete(Request $request, Employee $employee)
+    {
+        $message_bag = new MessageBag();
+        $errors = '';
+        $status_code = 500;
+        $message = '';
+
+        try {
+            $employee->delete();
+            $message = 'Employee data is deleted successfully!';
+            $status_code = 200;
+
+        } catch (\Exception $e){
+            $errors = $message_bag->add('_error_message', $e->getMessage());
+        }
+        return response()->json( [ 'errors' => $errors, 'message' => $message ], $status_code );
+    }
+
+    public function getDetail(Request $request, Employee $employee){
+        return view('employee.detail', compact('employee'));
     }
 
     public function getData(Request $request) {
         if ($request->ajax()) {
             return datatables()->of(Employee::query())
                 ->addColumn('action', function($row){
-                    $btn = '<a href="#modal" data-remote="/edit/' . $row->id . '" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">Edit</a>
-                                | <a href="/delete/'.$row->id.'" class="btn btn-danger btn-sm">Delete</a>';
+                    $btn = '<a href="#modal" data-remote="/detail/' . $row->id . '" class="btn btn-primary btn-info btn-sm" data-toggle="modal" data-target="#modal">View</a>| <a href="#modal" data-remote="/edit/' . $row->id . '" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">Edit</a>
+                                | <a href="#modal" data-remote="/delete/' . $row->id . '" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modal">Delete</a>';
                     return $btn;
                 })
                 ->editColumn('fullname', function ($row) {

@@ -12,9 +12,6 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name Prefix</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
                 <th scope="col">Name</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Gender</th>
@@ -37,10 +34,7 @@
                 ajax: "/data",
                 columns: [
                     {data: 'emp_id'},
-                    {data: 'name_prefix'},
-                    {data: 'first_name'},
-                    {data: 'last_name'},
-                    {data: 'fullname', searchable: false},
+                    {data: 'fullname'},
                     {data: 'email'},
                     {data: 'gender'},
                     {data: 'phone_no'},
@@ -49,8 +43,8 @@
                 ],
                 columnDefs: [
                     {
-                        'targets': [ 1, 2, 3 ],
-                        'visible': false
+                        'targets': [ 1 ],
+                        'orderable': false, /* true or false */
                     }
                 ]
             });

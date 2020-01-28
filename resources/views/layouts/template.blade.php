@@ -20,15 +20,11 @@
   </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ env('APP_URL') }}">
             Employee Information
 </a>
     <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="{{ route('logout') }}">
-                Logout
-            </a>
-        </li>
+        <a class="nav-link" href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Logout</a>
     </ul>
 </nav>
 <div class="container-fluid">
@@ -37,7 +33,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link @if(Request::segment(1) == '') active @endif" href="/home">
+            <a class="nav-link @if(Request::segment(1) == 'home') active @endif" href="/home">
               <span data-feather="home"></span>
               Home <span class="sr-only">(current)</span>
             </a>
@@ -49,7 +45,8 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 	@yield('content')
     </main>
-    @include('modal')
+      @include('logout')
+      @include('modal')
   </div>
 </div>
 

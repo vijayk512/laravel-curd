@@ -90,7 +90,7 @@
                 <label for="ssn" class="col-form-label">SSN</label>
                 <div class="row">
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ssn_1" maxlength="3"  id="ssn-1" pattern="\d{3}"/>
+                        <input type="text" class="form-control" name="ssn_1" maxlength="3"  id="ssn-1" />
                         <small class="text-danger"></small>
 
                     </div><label class="col-form-label">-</label>
